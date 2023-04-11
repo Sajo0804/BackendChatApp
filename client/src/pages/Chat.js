@@ -37,7 +37,7 @@ const Chat = () => {
     // Send get request to server to fetch all contacts
     const config = {
       headers:{
-        authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
+        // authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
       }
     };
 

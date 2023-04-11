@@ -24,7 +24,7 @@ const ChatBody = ({selectedChat, currentUser, closeChat}) => {
     useEffect(() => {
       const config = {
         headers:{
-          authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
+          // authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
         }
       };
       

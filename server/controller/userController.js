@@ -43,6 +43,7 @@ function login(req, res) {
     loginUser(username, password).then(data => {
         console.log("data: ", {data, accessToken})
         res.json({data, accessToken})
+        // res.json({data})
     })
     // res.json({accessToken: accessToken, refreshToken: refreshToken})
 }

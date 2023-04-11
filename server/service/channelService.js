@@ -1,16 +1,4 @@
-import Message from "../models/messageModel.js";
 import Channel from "../models/channelModel.js"
-
-export async function fetchMessages (from, to) {
-    // console.log("hello", from, to)
-    // const data = await Message.find({
-    //   users: {
-    //     $all: [from, to],
-    //   },
-    // }).sort({ updatedAt: 1 });
-  
-    // return data
-}
 
 export async function makeChannel (createdBy, theme) {
     // Check if username already exist in database
@@ -43,7 +31,7 @@ export async function postMessage (id, sender, fromName, text) {
   }];
 
   await Channel.updateOne({_id: id},{$set : {messages: newArray}})
-
+  console.log(channel)
   return ({ status: true, channel });
 }
 
@@ -66,7 +54,7 @@ export async function findChannels () {
   return ({ status: true, channels });
 }
 
-export async function removeChannel(id) {
+export async function removeChannel(id, createdBy) {
   const channel = await Channel.findOne({ _id: id });
 
   if (!channel) {
@@ -74,7 +62,12 @@ export async function removeChannel(id) {
     return ({ msg: "Channel doesnt exist", status: false })
   }
 
+  if (channel.createdBy != createdBy) {
+    console.log("You didnt create this channel", channel.createdBy, createdBy )
+    return ({ msg: `You didnt create this channel: ${channel.theme}`, status: false })
+  }
+
   await Channel.findOneAndRemove({ _id: id });
 }
 
-export default { fetchMessages, makeChannel, removeChannel, postMessage }
+export default { makeChannel, removeChannel, postMessage }

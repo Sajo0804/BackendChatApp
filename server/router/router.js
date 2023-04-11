@@ -1,21 +1,22 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import channelController from '../controller/channelController.js';
+import broadcastController from '../controller/broadcastController.js'
 import userController from '../controller/userController.js';
 const router = express.Router();
 
 // API endpoints
-router.get('/channel', authenticateToken, channelController.getChannels)
-router.get('/channel/:id', authenticateToken, channelController.getChannel)
-router.post('/channel/:id', authenticateToken, channelController.postChannel)
-router.put("/channel", authenticateToken, channelController.createChannel);
-router.delete('/channel/:id', authenticateToken, channelController.deleteChannel)
-router.get("/logout/:id", userController.logout)
-router.post('/login', userController.login)
-router.post('/register', userController.register)
+router.get('/channel', channelController.getChannels);
+router.get('/channel/:id', channelController.getChannel);
+router.post('/channel/:id', channelController.postChannel);
+router.put("/channel", channelController.createChannel);
+router.delete('/channel/:id', channelController.deleteChannel);
+router.get("/logout/:id", userController.logout);
+router.post('/login', authenticateToken, userController.login);
+router.post('/register', userController.register);
 router.get("/allusers", userController.getAllUsers);
-router.get("/broadcast")
-router.post("/broadcast")
+router.get("/broadcast", broadcastController.getBroadcast);
+router.post("/broadcast", authenticateToken, broadcastController.postBroadcast);
 
 // Filter
 function authenticateToken(req, res, next) {
@@ -27,12 +28,12 @@ function authenticateToken(req, res, next) {
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
           if (err) return res.sendStatus(403)
           req.user = user;
-          console.log(user)
+          console.log("USER >>>>>>>", user)
           next()
       })
 }
   
-  export default router;
+export default router;
 
 
   

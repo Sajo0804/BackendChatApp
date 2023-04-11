@@ -11,7 +11,7 @@ const MessageForm = ({selectedChat, currentUser}) => {
 
     const config = {
       headers:{
-        authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
+        // authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
       }
     };
 

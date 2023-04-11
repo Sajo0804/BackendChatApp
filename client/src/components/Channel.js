@@ -16,9 +16,10 @@ const Contact = ({channel, currentChat, currentUser}) => {
       }
     };
 
-    console.log(channel._id)
     if (currentUser) {
-      axios.delete(`${deleteChannelRoute}/${channel._id}`, config);
+      axios.delete(`${deleteChannelRoute}/${channel._id}`, {
+        createdBy: JSON.parse(localStorage.getItem("current user")._id)
+      }, config);
     }
   }
 
