@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from "axios"
-import { getMessageRoute } from "../utils/Routes";
+import { getBroadcastMessageRoute, getMessageRoute } from "../utils/Routes";
 import MessageForm from './MessageForm';
 import Message from './Message';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
@@ -24,7 +24,7 @@ const ChatBody = ({selectedChat, currentUser, closeChat}) => {
     useEffect(() => {
       const config = {
         headers:{
-          // authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
+          authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
         }
       };
       
@@ -32,7 +32,13 @@ const ChatBody = ({selectedChat, currentUser, closeChat}) => {
         const user = await JSON.parse(
           localStorage.getItem("current user")
         );
-        const response = await axios.get(`${getMessageRoute}/${selectedChat._id}`, config);
+
+        if (selectedChat.theme === "Nödmeddelande") {
+          const response = await axios.get(`${getBroadcastMessageRoute}`, config);
+          console.log(response)
+          return setMessages(response.data.channel.messages);
+        }
+        const response = await axios.get(`${getMessageRoute}/${selectedChat._id}`);
 
         setMessages(response.data.channel.messages);
         console.log(response.data.channel.messages)
@@ -67,8 +73,10 @@ const ChatBody = ({selectedChat, currentUser, closeChat}) => {
             );
           })}
         </div>
-        
-        <MessageForm currentUser={currentUser} selectedChat={selectedChat}/>
+        {
+          selectedChat.theme === "Nödmeddelande" ? <></> :
+          <MessageForm currentUser={currentUser} selectedChat={selectedChat}/>
+        }
         <div className='scroll-to-bottom' ref={messagesEndRef}/>
     </div>
   )

@@ -5,7 +5,6 @@ import Broadcast from './Broadcast';
 const ContactList = ({channels, currentChat, currentUser}) => {
   return (
     <ul>
-      <Broadcast currentChat={currentChat} />
       {channels.map((channel, index) => {
         return (
           <Contact

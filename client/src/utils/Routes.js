@@ -9,3 +9,5 @@ export const sendMessageRoute = `${host}/channel`
 export const getMessageRoute = `${host}/channel`
 export const createChannelRoute = `${host}/channel`
 export const deleteChannelRoute = `${host}/channel`
+export const broadcastRoute = `${host}/broadcast`
+export const getBroadcastMessageRoute = `${host}/broadcast`

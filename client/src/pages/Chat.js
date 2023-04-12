@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import ChannelList from '../components/ChannelList'
 import axios from "axios"
 import { useNavigate, Link } from "react-router-dom";
-import { allChannelsRoute, logoutRoute, host, deleteRoute } from '../utils/Routes';
+import { allChannelsRoute, logoutRoute, host, deleteRoute, broadcastRoute } from '../utils/Routes';
 import ChatBody from '../components/ChatBody'
 import CreateChannel from '../components/CreateChannel';
 import {GrMenu} from 'react-icons/gr'
@@ -37,14 +37,20 @@ const Chat = () => {
     // Send get request to server to fetch all contacts
     const config = {
       headers:{
-        // authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
+        authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
       }
     };
 
     const getAllChannels = async () => {
       if (currentUser) {
-        const data = await axios.get(`${allChannelsRoute}`, config);
-        setChannels(data.data.channels);
+        const data = await axios.get(`${allChannelsRoute}`);
+        const broadcastData = await axios.get(`${broadcastRoute}`);
+        console.log(broadcastData.data.channel)
+        
+        let channelsList = data.data.channels;
+        channelsList.push(broadcastData.data.channel)
+        await setChannels(data.data.channels);
+        console.log(channels)
       }
     }
     getAllChannels()
