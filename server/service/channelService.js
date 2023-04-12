@@ -60,6 +60,7 @@ export async function removeChannel(id, createdBy) {
   if (!channel) {
     console.log("Channel doesnt exist")
     return ({ msg: "Channel doesnt exist", status: false })
+    
   }
 
   if (channel.createdBy != createdBy) {
@@ -68,6 +69,7 @@ export async function removeChannel(id, createdBy) {
   }
 
   await Channel.findOneAndRemove({ _id: id });
+  return ({ status: true });
 }
 
 export default { makeChannel, removeChannel, postMessage }

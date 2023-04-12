@@ -11,7 +11,7 @@ const CreateChannel = ({currentUser}) => {
     const handleCreateChannel = async (e) => {    
         const config = {
           headers:{
-            authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
+            // authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
           }
         };
     

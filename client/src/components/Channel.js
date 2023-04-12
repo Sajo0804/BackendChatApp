@@ -9,19 +9,22 @@ const Contact = ({channel, currentChat, currentUser}) => {
     currentChat(channel);
   };
 
-  const deleteChannel = () => {
-    const config = {
-      headers:{
-        authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
-      }
-    };
 
+
+  const deleteChannel = async () => {
+    // const config = {
+    //   headers:{
+    //     // authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
+    //   }
+    // };
+
+    console.log("user id: ", currentUser._id)
+    console.log("channel id: ", channel._id)
     if (currentUser) {
-      axios.delete(`${deleteChannelRoute}/${channel._id}`, {
-        createdBy: JSON.parse(localStorage.getItem("current user")._id)
-      }, config);
-    }
+      await axios.delete(`${deleteChannelRoute}/id=${channel._id}&createdBy=${currentUser._id}`);
+    }    
   }
+
 
   return (
         <li

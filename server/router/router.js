@@ -10,9 +10,9 @@ router.get('/channel', channelController.getChannels);
 router.get('/channel/:id', channelController.getChannel);
 router.post('/channel/:id', channelController.postChannel);
 router.put("/channel", channelController.createChannel);
-router.delete('/channel/:id', channelController.deleteChannel);
+router.delete('/channel/:id&:createdby', channelController.deleteChannel);
 router.get("/logout/:id", userController.logout);
-router.post('/login', authenticateToken, userController.login);
+router.post('/login', userController.login);
 router.post('/register', userController.register);
 router.get("/allusers", userController.getAllUsers);
 router.get("/broadcast", broadcastController.getBroadcast);
@@ -22,7 +22,7 @@ router.post("/broadcast", authenticateToken, broadcastController.postBroadcast);
 function authenticateToken(req, res, next) {
       const authHeader = req.headers['authorization']
       const token = authHeader && authHeader.split(' ')[1];
-  
+      
       if (token == null) return res.sendStatus(401)
   
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
