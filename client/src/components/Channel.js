@@ -28,7 +28,7 @@ const Contact = ({channel, currentChat, currentUser}) => {
 
   return (
         <li
-          className='user-card'
+          className={ channel.theme === "Nödmeddelande" ? "user-card alert" : "user-card"}
           key={channel._id}          
         >
           <div className="username" onClick={() => changeCurrentChat(channel)}>

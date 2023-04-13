@@ -75,6 +75,10 @@ input {
   justify-content: space-between;
 }
 
+.alert {
+  background-color: rgb(186, 48, 48);
+}
+
 
 .scroll-to-bottom {
   display: block;

@@ -45,12 +45,11 @@ const Chat = () => {
       if (currentUser) {
         const data = await axios.get(`${allChannelsRoute}`);
         const broadcastData = await axios.get(`${broadcastRoute}`);
-        console.log(broadcastData.data.channel)
         
         let channelsList = data.data.channels;
         channelsList.push(broadcastData.data.channel)
+        channelsList.reverse()
         await setChannels(data.data.channels);
-        console.log(channels)
       }
     }
     getAllChannels()
