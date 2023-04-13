@@ -58,7 +58,6 @@ const Chat = () => {
 
   const handleChangeSelectedChat = (chat) => {
     setSelectedChat(chat)
-    console.log(chat)
   }
 
   const closeChat = () => {

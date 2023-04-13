@@ -20,7 +20,6 @@ function postChannel(req, res) {
     const id = req.params.id;
 
     const { sender, fromName, text } = req.body;
-    console.log(text)
     postMessage(id, sender, fromName, text).then(data => {
         if (!data.status) {
             res.status(400).send(data.msg)

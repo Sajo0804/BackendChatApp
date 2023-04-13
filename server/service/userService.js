@@ -11,14 +11,12 @@ export async function loginUser (username, password) {
     const user = await User.findOne({ username });
 
     if (!user) {
-        console.log("User doesnt exist")
         return ({ msg: "Username doesnt exist", status: false })
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-        console.log("Password doesnt exist")
         return ({ msg: "Password doesnt exist", status: false })
     }
 

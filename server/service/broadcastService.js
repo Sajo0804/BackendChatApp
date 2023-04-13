@@ -20,14 +20,12 @@ export async function postBroadcastMessage(sender, fromName, text) {
     const channel = await Broadcast.findOne({ theme: "Nödmeddelande" });
 
     if (!channel) {
-        console.log("Channel doesnt exist")
         return ({ msg: "Channel doesnt exist", status: false })
     }
 
     const newArray = [...channel.messages, {sender: sender, fromName: fromName, text: text, createdAt: Date.now()}];
 
     await Broadcast.updateOne({theme: "Nödmeddelande"},{$set : {messages: newArray}})
-    console.log(channel)
     return ({ status: true, channel });
 }
 

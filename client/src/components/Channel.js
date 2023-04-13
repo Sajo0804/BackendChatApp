@@ -12,14 +12,6 @@ const Contact = ({channel, currentChat, currentUser}) => {
 
 
   const deleteChannel = async () => {
-    // const config = {
-    //   headers:{
-    //     // authorization: "Bearer " + JSON.parse(localStorage.getItem("jwt")),
-    //   }
-    // };
-
-    console.log("user id: ", currentUser._id)
-    console.log("channel id: ", channel._id)
     if (currentUser) {
       await axios.delete(`${deleteChannelRoute}/id=${channel._id}&createdBy=${currentUser._id}`);
     }    

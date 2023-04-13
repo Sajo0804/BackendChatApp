@@ -35,13 +35,11 @@ const ChatBody = ({selectedChat, currentUser, closeChat}) => {
 
         if (selectedChat.theme === "Nödmeddelande") {
           const response = await axios.get(`${getBroadcastMessageRoute}`, config);
-          console.log(response)
           return setMessages(response.data.channel.messages);
         }
         const response = await axios.get(`${getMessageRoute}/${selectedChat._id}`);
 
         setMessages(response.data.channel.messages);
-        console.log(response.data.channel.messages)
       }
       getMessages()
     }, []);

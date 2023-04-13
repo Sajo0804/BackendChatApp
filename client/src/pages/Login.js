@@ -28,8 +28,6 @@ const Login = () => {
         password,
       });
 
-      console.log(data.accessToken)
-
       // Display message that server sends back
       if (data.data.status === false) {
         alert(data.msg)

@@ -23,7 +23,6 @@ export async function postMessage (id, sender, fromName, text) {
   const channel = await Channel.findOne({ _id: id });
 
   if (!channel) {
-    console.log("Channel doesnt exist")
     return ({ msg: "Channel doesnt exist", status: false })
   }
 
@@ -31,7 +30,6 @@ export async function postMessage (id, sender, fromName, text) {
   }];
 
   await Channel.updateOne({_id: id},{$set : {messages: newArray}})
-  console.log(channel)
   return ({ status: true, channel });
 }
 
@@ -40,7 +38,6 @@ export async function findChannel (id) {
   const channel = await Channel.findOne({ _id: id });
 
   if (!channel) {
-      console.log("Channel doesnt exist")
       return ({ msg: "Channel doesnt exist", status: false })
   }
 
@@ -58,13 +55,11 @@ export async function removeChannel(id, createdBy) {
   const channel = await Channel.findOne({ _id: id });
 
   if (!channel) {
-    console.log("Channel doesnt exist")
     return ({ msg: "Channel doesnt exist", status: false })
     
   }
 
   if (channel.createdBy != createdBy) {
-    console.log("You didnt create this channel", channel.createdBy, createdBy )
     return ({ msg: `You didnt create this channel: ${channel.theme}`, status: false })
   }
 

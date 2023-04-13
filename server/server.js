@@ -1,6 +1,4 @@
 import express from 'express';
-// import http from 'http';
-// import path from 'path';
 import mongoose from "mongoose"
 import cors from 'cors'
 import router from './router/router.js';
